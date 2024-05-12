@@ -1,19 +1,14 @@
 {% extends "base.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
 {% block title %}LegalGanesha{% endblock %}
 
 {% block page_content %}
-<div class="page-header">
-    {% if casename %}
-        <h1> You Searched for {{ casename }} </h1>
-    {% endif %}
+<div class="content">
+    <h1>Welcome to Legal Ganesha</h1>
+    <div class="quote-container">
+        <blockquote id="quote">"The Constitution of the United States was a layman's document, not a lawyer's contract."
+        </blockquote>
+        <p class="author">- Franklin D. Roosevelt<br>32nd President of the United States: 1933 ‐ 1945</p>
+        <p>Address on Constitution Day, Washington, D.C.</p>
+    </div>
 </div>
-<div>
-    {{ wtf.quick_form(form) }}
-</div>
-{% endblock %}
-
-{% block scripts %}
-{{ super() }}
-{{ pagedown.include_pagedown() }}
 {% endblock %}

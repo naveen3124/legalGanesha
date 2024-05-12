@@ -5,26 +5,44 @@
 {% block title %}LegalGanesha - Search Results{% endblock %}
 
 {% block page_content %}
-    {{ wtf.quick_form(form) }}
-    <h1>Search Results</h1>
+{{ wtf.quick_form(form) }}
+<h1>Search Results</h1>
 
-    {% if resp %}
-        <ul>
-            {% for record in resp %}
-                <li>
-                    <strong>Record:</strong>
-                    <ul>
-                        {% for key, value in record.items() %}
-                            <li><strong>{{ key }}:</strong> {{ value }}</li>
-                        {% endfor %}
-                    </ul>
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No Search Results</p>
-    {% endif %}
+{% if resp %}
+    <ul class="list-group">
+        <strong>Records:</strong>
+        {% for record in resp %}
+            <li class="list-group-item">
+                <ul class="list-group list-group-flush">
+                    {% for key, value in record.items() %}
+                        {% if key == 'Fields' %}
+                            <li class="list-group-item">
+                                <strong>{{ key }}:</strong>
+                                <table class="table">
+                                    <tbody>
+                                        {% for inner_key, inner_value in value.items() %}
+                                            <tr>
+                                                <td>{{ inner_key }}</td>
+                                                <td>{{ inner_value }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </li>
+                        {% else %}
+                            <li class="list-group-item">
+                                <strong>{{ key }}:</strong> {{ value }}
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p class="alert alert-info">No Search Results</p>
+{% endif %}
 
-    {# You can use Bootstrap form elements here if needed, using the wtf extension #}
+{# You can use Bootstrap form elements here if needed, using the wtf extension #}
 
 {% endblock %}

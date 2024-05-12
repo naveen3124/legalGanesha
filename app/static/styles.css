@@ -1,78 +1,4 @@
-.profile-thumbnail {
-    position: absolute;
-}
-.profile-header {
-    min-height: 260px;
-    margin-left: 280px;
-}
-div.post-tabs {
-    margin-top: 16px;
-}
-ul.posts {
-    list-style-type: none;
-    padding: 0px;
-    margin: 16px 0px 0px 0px;
-    border-top: 1px solid #e0e0e0;
-}
-div.post-tabs ul.posts {
-    margin: 0px;
-    border-top: none;
-}
-ul.posts li.post {
-    padding: 8px;
-    border-bottom: 1px solid #e0e0e0;
-}
-ul.posts li.post:hover {
-    background-color: #f0f0f0;
-}
-div.post-date {
-    float: right;
-}
-div.post-author {
-    font-weight: bold;
-}
-div.post-thumbnail {
-    position: absolute;
-}
-div.post-content {
-    margin-left: 48px;
-    min-height: 48px;
-}
-div.post-footer {
-    text-align: right;
-}
-ul.comments {
-    list-style-type: none;
-    padding: 0px;
-    margin: 16px 0px 0px 0px;
-}
-ul.comments li.comment {
-    margin-left: 32px;
-    padding: 8px;
-    border-bottom: 1px solid #e0e0e0;
-}
-ul.comments li.comment:nth-child(1) {
-    border-top: 1px solid #e0e0e0;
-}
-ul.comments li.comment:hover {
-    background-color: #f0f0f0;
-}
-div.comment-date {
-    float: right;
-}
-div.comment-author {
-    font-weight: bold;
-}
-div.comment-thumbnail {
-    position: absolute;
-}
-div.comment-content {
-    margin-left: 48px;
-    min-height: 48px;
-}
-div.comment-form {
-    margin: 16px 0px 16px 32px;
-}
+
 div.pagination {
     width: 100%;
     text-align: right;
@@ -104,4 +30,76 @@ div.flask-pagedown-preview h3 {
 }
 .table.followers tr {
     border-bottom: 1px solid #e0e0e0;
+}
+.logo-img {
+    max-width: 16px; /* Adjust the maximum width as needed */
+    margin-top: 16px; /* Adjust the margin as needed */
+}
+
+.background-image {
+    background-image: url('/static/images/background.jpg');
+    background-size: cover;
+    background-position: center center;
+    height: 100vh;
+    opacity: 0.5;
+}
+
+/* Media query for tablets (768px) and smaller */
+@media only screen and (max-width: 768px) {
+    .background-image {
+        background-size: contain;
+        /* Add other styles as needed for smaller screens */
+    }
+}
+
+/* Media query for mobile devices (576px) and smaller */
+@media only screen and (max-width: 576px) {
+    .background-image {
+        background-size: cover; /* or any other desired style for mobile */
+        /* Add other styles as needed for smaller screens */
+    }
+}
+
+.content {
+    padding: 20px;
+    color: Black; /* Example: Text color on top of the background */
+    text-align: center; /* Center align the content */
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.quote-container {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+blockquote {
+    font-size: 20px;
+    font-style: italic;
+    border-left: 2px solid #333;
+    padding-left: 10px;
+    margin-bottom: 10px;
+    cursor: pointer; /* Add cursor pointer for click effect */
+}
+
+@keyframes scrollAnimation {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-100%);
+    }
+}
+
+.animated-scroll {
+    animation: scrollAnimation 5s linear infinite;
+}
+
+.author {
+        font-weight: bold;
+        margin-top: 10px;
 }

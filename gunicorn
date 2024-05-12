@@ -1,0 +1,69 @@
+If you already have Apache running as a frontend and want to forward requests from Apache to your Gunicorn server, you can use the mod_proxy module. Here's how you can configure Apache as a reverse proxy for Gunicorn:
+
+1. Enable mod_proxy and mod_proxy_http:
+bash
+Copy code
+# On CentOS
+sudo yum install mod_proxy mod_proxy_http
+2. Configure Apache Virtual Host:
+Edit your Apache configuration file, typically located at /etc/httpd/conf/httpd.conf or in a separate file in the /etc/httpd/conf.d/ directory.
+
+apache
+Copy code
+<VirtualHost *:80>
+    ServerName your_server_ip_or_domain
+
+    ProxyPass / http://127.0.0.1:5000/
+    ProxyPassReverse / http://127.0.0.1:5000/
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+Replace your_server_ip_or_domain with your server's IP address or domain name.
+
+3. Restart Apache:
+bash
+Copy code
+sudo systemctl restart httpd
+4. Run Gunicorn with a Socket:
+Instead of binding Gunicorn to an IP address and port, you can run Gunicorn with a Unix socket. Update your Gunicorn command:
+
+bash
+Copy code
+gunicorn -w 4 -b unix:/path/to/your/socket.sock app:app
+Replace /path/to/your/socket.sock with the actual path where you want to create the socket file.
+
+5. Update Apache Configuration for the Socket:
+Modify the Apache Virtual Host configuration to use the socket:
+
+apache
+Copy code
+<VirtualHost *:80>
+    ServerName your_server_ip_or_domain
+
+    ProxyPass / unix:/path/to/your/socket.sock|http://localhost/
+    ProxyPassReverse / unix:/path/to/your/socket.sock|http://localhost/
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+Again, replace your_server_ip_or_domain with your server's IP address or domain name, and update the socket path accordingly.
+
+6. Restart Apache:
+bash
+Copy code
+sudo systemctl restart httpd
+Now, Apache will forward requests to your Gunicorn server via the Unix socket. This setup allows Apache to act as a reverse proxy, handling incoming requests on port 80 and forwarding them to Gunicorn. Adjust the configuration based on your specific paths and requirements.
+
+gunicorn -w 4 -b unix:/mnt/vol1/legalGanesha/legalGanesha/socket.sock legalGanesha:app
+
+import click
+
+@click.command()
+@click.option('--name', prompt='Your name', help='The person to greet.')
+def hello(name):
+    """Simple program that greets NAME for a total of COUNT times."""
+    click.echo(f'Hello, {name}!')
+
+if __name__ == '__main__':
+    hello()
